@@ -1,4 +1,4 @@
-
+﻿
 import React, { useEffect, useState } from 'react';
 import { X, Terminal, Cpu, Eye, Binary, ShieldAlert, Zap, Network, ArrowRight, Quote, Lock, Globe } from 'lucide-react';
 
@@ -54,12 +54,12 @@ export const MatrixHackingDoc: React.FC<MatrixHackingDocProps> = ({ onClose }) =
             
             {/* Intro Terminal */}
             <div className="font-mono text-xs text-emerald-600/70 mb-12 border-b border-emerald-900/30 pb-6 space-y-2">
-               <p>> INITIATING TRUTH_REVEAL_SEQUENCE...</p>
-               <p>> ANALYZING SUBJECT'S FINANCIAL CORE...</p>
-               <p>> DETECTED: CRITICAL_ERROR IN LOGIC_GATE (HARD_WORK != WEALTH)</p>
-               <p>> BYPASSING SOCIAL_CONDITIONING... {decodeProgress}%</p>
+               <p>{'>'} INITIATING TRUTH_REVEAL_SEQUENCE...</p>
+               <p>{'>'} ANALYZING SUBJECT&apos;S FINANCIAL CORE...</p>
+               <p>{'>'} DETECTED: CRITICAL_ERROR IN LOGIC_GATE (HARD_WORK != WEALTH)</p>
+               <p>{'>'} BYPASSING SOCIAL_CONDITIONING... {decodeProgress}%</p>
                <p className={`text-emerald-400 font-bold ${decodeProgress === 100 ? 'block' : 'hidden'}`}>
-                  > ACCESS GRANTED. WELCOME TO THE REAL WORLD.
+                  {'>'} ACCESS GRANTED. WELCOME TO THE REAL WORLD.
                </p>
             </div>
 
@@ -220,3 +220,4 @@ export const MatrixHackingDoc: React.FC<MatrixHackingDocProps> = ({ onClose }) =
     </div>
   );
 };
+
