@@ -224,7 +224,7 @@ export const AuthorPage: React.FC<{ onCheckout: () => void }> = ({ onCheckout })
           <div className="space-y-4">
             <h4 className="text-gold font-mono tracking-[0.8em] uppercase text-xs font-black animate-pulse">The Narrative Arc</h4>
             <h1 className="font-serif font-black text-6xl md:text-9xl text-white tracking-tighter leading-tight uppercase">
-              부품에서 <br className="md:hidden"/> <span className="text-gold italic">설계자로.</span>
+              부품에서 <br className="md:hidden"/> <span className="text-gold italic pr-3">설계자로.</span>
             </h1>
           </div>
           <div className="space-y-8">
@@ -266,7 +266,7 @@ export const AuthorPage: React.FC<{ onCheckout: () => void }> = ({ onCheckout })
           <div className="space-y-8">
             <h2 className="text-5xl md:text-[5.5rem] lg:text-[7rem] font-serif font-[900] text-white tracking-tighter uppercase leading-[0.9]">
               설계도는 완성되었습니다.<br /> 
-              이제 당신의 <span className="text-gold italic underline decoration-gold/30 underline-offset-8 drop-shadow-[0_0_30px_rgba(191,149,63,0.6)]">제국을 건설하십시오.</span>
+              이제 당신의 <span className="text-gold italic underline decoration-gold/30 underline-offset-8 drop-shadow-[0_0_30px_rgba(191,149,63,0.6)] pr-3">제국을 건설하십시오.</span>
             </h2>
             <p className="text-brand-muted text-2xl font-serif italic">시스템은 이미 준비되었습니다. 당신은 집행하기만 하면 됩니다.</p>
           </div>

@@ -1,15 +1,12 @@
 
 import React, { useState, useEffect } from 'react';
 import { 
-  Lock, Unlock, Zap, Database, Terminal, Cpu, LayoutTemplate, 
-  MessageSquare, Globe, Search, ShieldCheck, CreditCard, 
-  MousePointer2, Eye, PenTool, Layers, Grid, Crosshair, 
-  FileText, Activity, AlertCircle, Network, ChevronRight, Box, Hexagon, Key,
-  Crown, ShieldAlert, Binary, Brain, BookOpen, Star,
-  Bot, Magnet, Megaphone, Radio, Landmark
+  Lock, Unlock, Terminal 
 } from 'lucide-react';
-import { Button } from './Button';
 import { useSystem } from './SystemCore';
+import { ArmoryAsset } from '../types/armory';
+import { UNIFIED_ARMORY_ASSETS } from '../data/armory/unified';
+
 import { GlitchDiagnosticDoc } from './GlitchDiagnosticDoc';
 import { MatrixHackingDoc } from './MatrixHackingDoc';
 import { ZeroToOneRoadmapDoc } from './ZeroToOneRoadmapDoc';
@@ -19,110 +16,12 @@ import { SilentAuthorityDoc } from './SilentAuthorityDoc';
 import { FrameControlDoc } from './FrameControlDoc';
 import { SourcingSecretsDoc } from './SourcingSecretsDoc';
 import { KeywordSniperDoc } from './KeywordSniperDoc';
-import { TaxProtocolDoc } from './TaxProtocolDoc';
-import { CopywritingDoc } from './CopywritingDoc';
-import { LegalShieldDoc } from './LegalShieldDoc';
-import { ArchitectNoteDoc } from './ArchitectNoteDoc';
-import { HiddenChapter } from './HiddenChapter';
-import { DigitalFeudalismDoc } from './DigitalFeudalismDoc';
-import { OpinionControlDoc } from './OpinionControlDoc';
-import { InsiderLeakDoc } from './InsiderLeakDoc';
-import { ArchBlueprintDoc } from './ArchBlueprintDoc';
-import { FrameControlMaxDoc } from './FrameControlMaxDoc';
-import { TrafficHijackDoc } from './TrafficHijackDoc'; // Import New Doc
 
 interface UnifiedArmoryPageProps {
   onBack?: () => void;
   onGoToVIP?: () => void; // New Prop for Navigation
   initialMode?: 'standard' | 'blueprint'; 
 }
-
-interface ArmoryAsset {
-  id: string;
-  tier: 'FREE' | 'VIP';
-  title: string;
-  subtitle: string;
-  type: string;
-  icon: React.ReactNode;
-  desc: string;
-  highlight?: boolean; // New prop for Hero items
-}
-
-const ARMORY_DB: ArmoryAsset[] = [
-  // --- FREE TIER ASSETS (Standard Public Armory) ---
-  {
-    id: 'f1',
-    tier: 'FREE',
-    title: 'The Glitch 진단 키트',
-    subtitle: '노동 의존도 자가 진단',
-    type: 'DIAGNOSTIC',
-    icon: <Activity size={24} />,
-    desc: "당신의 소득 구조가 시스템에 얼마나 종속되어 있는지 수치로 확인하는 계산기."
-  },
-  {
-    id: 'f2',
-    tier: 'FREE',
-    title: '무자본 창업 로드맵',
-    subtitle: '0 to 1 실행 지도',
-    type: 'STRATEGY',
-    icon: <Grid size={24} />,
-    desc: "자본금 0원으로 첫 수익을 만들기까지의 구체적인 단계별 미션."
-  },
-  {
-    id: 'f5',
-    tier: 'FREE',
-    title: '키워드 스나이퍼',
-    subtitle: '황금 키워드 채굴기',
-    type: 'TOOL',
-    icon: <Crosshair size={24} />,
-    desc: "경쟁 강도는 낮고 검색량은 높은 시장의 빈틈을 찾아내는 분석 툴."
-  },
-  {
-    id: 'c2',
-    tier: 'FREE',
-    title: '파충류 뇌 자극 템플릿',
-    subtitle: '본능 타격 카피라이팅',
-    type: 'TEMPLATE',
-    icon: <Zap size={24} />,
-    desc: "이성을 마비시키고 본능(공포, 욕망)을 자극하여 구매 버튼을 누르게 만드는 문장 공식."
-  },
-  {
-    id: 'c3',
-    tier: 'FREE',
-    title: '무한 레버리지 프로토콜',
-    subtitle: '자동화 시스템 설계',
-    type: 'SYSTEM',
-    icon: <Network size={24} />,
-    desc: "나 대신 일하는 AI와 위임 시스템을 구축하여 시간을 0으로 수렴시키는 법."
-  },
-  {
-    id: 'c5',
-    tier: 'FREE',
-    title: 'Silent Authority',
-    subtitle: '무언의 브랜딩',
-    type: 'BRANDING',
-    icon: <LayoutTemplate size={24} />,
-    desc: "말하지 않고도 압도적인 권위를 풍기는 시각적 브랜딩 가이드라인."
-  },
-  {
-    id: 'c6',
-    tier: 'FREE',
-    title: '프레임 컨트롤 대화법',
-    subtitle: '갑의 언어',
-    type: 'SCRIPT',
-    icon: <MessageSquare size={24} />,
-    desc: "협상 테이블에서 언제나 우위를 점하는 심리적 프레임 장악 기술."
-  },
-  {
-    id: 'f4',
-    tier: 'FREE',
-    title: '시크릿 소싱 데이터베이스',
-    subtitle: '공급처 리스트 50선',
-    type: 'DATA',
-    icon: <Database size={24} />,
-    desc: "유통 마진을 획기적으로 줄여주는 검증된 도매처 및 공장 직거래 리스트."
-  },
-];
 
 export const UnifiedArmoryPage: React.FC<UnifiedArmoryPageProps> = ({ onBack, onGoToVIP, initialMode = 'standard' }) => {
   const { toast, sounds } = useSystem();
@@ -151,7 +50,7 @@ export const UnifiedArmoryPage: React.FC<UnifiedArmoryPageProps> = ({ onBack, on
   const closeViewer = () => setActiveViewerId(null);
 
   // Always show FREE assets in this component
-  const displayedAssets = ARMORY_DB;
+  const displayedAssets = UNIFIED_ARMORY_ASSETS;
 
   return (
     <div className={`min-h-screen transition-colors duration-1000 relative overflow-hidden font-sans bg-[#020617]`}>
@@ -188,7 +87,7 @@ export const UnifiedArmoryPage: React.FC<UnifiedArmoryPageProps> = ({ onBack, on
                </span>
             </div>
             <h1 className={`text-5xl md:text-7xl font-serif font-black tracking-tighter uppercase leading-none text-white drop-shadow-[0_0_30px_rgba(34,211,238,0.3)]`}>
-              The <span className={`italic transition-colors duration-500 text-cyan-400`}>Armory</span>
+              The <span className={`italic transition-colors duration-500 text-cyan-400 pr-3`}>Armory</span>
             </h1>
             <p className={`text-sm font-serif italic transition-colors duration-500 text-slate-400`}>
                전쟁터로 나가는 초심자를 위한 기초 보급품입니다.

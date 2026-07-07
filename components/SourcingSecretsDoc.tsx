@@ -1,25 +1,15 @@
 
 import React, { useState } from 'react';
-import { X, Database, Truck, Globe, Lock, Search, ExternalLink, Container, Barcode, DollarSign, ArrowRight, ShieldCheck, Factory, Copy, CheckCircle2, Download, AlertTriangle, Package, Anchor, Layers } from 'lucide-react';
+import { X, Database, Globe, Lock, Container, Factory, Copy, ShieldCheck, Download, AlertTriangle, Package, Anchor, ArrowRight } from 'lucide-react';
 import { Button } from './Button';
+import { VIP_SUPPLIERS } from '../data/modules/sourcing';
+import { Supplier } from '../types/armory';
 
 interface SourcingSecretsDocProps {
   onClose: () => void;
   onCheckout: () => void;
   isVip?: boolean; // Prop to determine access level
 }
-
-// Mock Data for VIP Mode
-const VIP_SUPPLIERS = [
-  { id: '01', name: 'Yiwu Go (이우고)', category: '잡화/생활용품', margin: '40%~', note: '소량 사입 가능. "샘플 요청" 멘트 필수.', status: 'OPEN', type: 'CHINA' },
-  { id: '02', name: 'Vvic (브이빅)', category: '여성 의류/동대문', margin: '30%~', note: '이미지 사용 허용 업체 위주로 컨택.', status: 'OPEN', type: 'DOMESTIC' },
-  { id: '03', name: '1688 Super Factory A', category: '캠핑/아웃도어', margin: '65%~', note: '위챗 ID: camp888. "한국 셀러 소개" 언급 시 MOQ 10개 가능.', status: 'VIP', type: 'CHINA' },
-  { id: '04', name: 'Onda B2B (폐쇄몰)', category: '반려동물 용품', margin: '55%~', note: '사업자 등록증 필수. 첫 거래 시 30만원 이상 매입 조건.', status: 'VIP', type: 'DOMESTIC' },
-  { id: '05', name: 'Shenzhen Elec OEM', category: '소형 가전', margin: '70%~', note: 'KC인증 대행 가능 공장. 화이트라벨링(로고 박기) 무료.', status: 'VIP', type: 'CHINA' },
-  { id: '06', name: 'Euro Dropship Hub', category: '명품/잡화', margin: '25%~', note: '영국 배대지 연동 필수. 인보이스 언더밸류 주의.', status: 'VIP', type: 'DROPSHIP' },
-  { id: '07', name: 'K-Food Bulk', category: '가공식품', margin: '40%~', note: '유통기한 임박 상품 땡처리 전문. 마진율 극대화.', status: 'VIP', type: 'DOMESTIC' },
-  { id: '08', name: 'Toy World China', category: '유아동/장난감', margin: '50%~', note: '어린이 제품 안전 인증 서류 제공함.', status: 'VIP', type: 'CHINA' },
-];
 
 export const SourcingSecretsDoc: React.FC<SourcingSecretsDocProps> = ({ onClose, onCheckout, isVip = false }) => {
   const [activeTab, setActiveTab] = useState<'all' | 'domestic' | 'china' | 'dropship'>('all');
@@ -64,7 +54,7 @@ export const SourcingSecretsDoc: React.FC<SourcingSecretsDocProps> = ({ onClose,
         {/* Content Body */}
         <div className="flex-grow overflow-y-auto bg-[#020617] text-slate-300 font-sans relative selection:bg-emerald-500/30 selection:text-white scroll-smooth">
           {/* Background Grid */}
-          <div className="absolute inset-0 grid-pattern opacity-10 pointer-events-none" />
+          <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'linear-gradient(rgba(16,185,129,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(16,185,129,0.1) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
           
           <div className="max-w-4xl mx-auto p-8 md:p-12 space-y-16 relative z-10">
             
@@ -184,7 +174,7 @@ export const SourcingSecretsDoc: React.FC<SourcingSecretsDocProps> = ({ onClose,
                               <p className="text-sm text-slate-400 max-w-xl leading-relaxed">
                                  {activeScript === 'moq' && "공장은 소량 주문을 싫어합니다. '샘플 테스트' 명분과 '미래 물량'을 담보로 MOQ를 1/10로 줄이는 스크립트입니다."}
                                  {activeScript === 'price' && "무조건 깎아달라고 하면 하수입니다. 가상의 경쟁사 견적을 명분으로 제시하여 담당자의 체면을 세워주며 가격을 깎습니다."}
-                                 {activeScript === 'exclusive' && "단순 판매가 아닌 '한국 파트너'로서의 지위를 요구하십시오. 마케팅 계획서를 첨부하면 승률이 90%로 올라갑니다."}
+                                 {activeScript === 'exclusive' && "단순 판매가 아닌 '한국 파트너'로서의 지위를 요구하십시오. 마케팅 계획서를 첨부하면 승률 90%로 올라갑니다."}
                               </p>
                            </div>
                            <button 

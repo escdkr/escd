@@ -115,7 +115,7 @@ export const FAQPage: React.FC = () => {
            Knowledge Base
         </div>
         <h1 className="font-serif font-black text-5xl md:text-7xl text-white tracking-tighter uppercase">
-          Frequently Asked <br/> <span className="text-gold italic">Questions</span>
+          Frequently Asked <br/> <span className="text-gold italic pr-3">Questions</span>
         </h1>
         <p className="text-brand-muted text-sm font-serif max-w-lg mx-auto leading-relaxed">
           시스템에 대한 의문을 해소하십시오. <br/>

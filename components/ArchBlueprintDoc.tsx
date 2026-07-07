@@ -116,7 +116,7 @@ export const ArchBlueprintDoc: React.FC<ArchBlueprintDocProps> = ({ onClose }) =
                     <div className="space-y-12 animate-fade-in-up">
                        <div className="text-center space-y-4">
                           <h1 className="text-4xl md:text-5xl font-black text-white font-serif uppercase tracking-tight">
-                             Brand <span className="text-gold italic">Generator</span>
+                             Brand <span className="text-gold italic pr-2">Generator</span>
                           </h1>
                           <p className="text-white/40 font-light text-lg">
                              "위대한 브랜드는 디자인이 아니라 '컨셉'에서 탄생합니다."
@@ -204,7 +204,7 @@ export const ArchBlueprintDoc: React.FC<ArchBlueprintDocProps> = ({ onClose }) =
                     <div className="space-y-12 animate-fade-in-up">
                        <div className="text-center space-y-4">
                           <h1 className="text-4xl md:text-5xl font-black text-white font-serif uppercase tracking-tight">
-                             Spatial <span className="text-white/50 italic">Psychology</span>
+                             Spatial <span className="text-white/50 italic pr-2">Psychology</span>
                           </h1>
                           <p className="text-white/40 font-light text-lg">
                              "공간은 무언의 설득입니다. 고객의 동선을 설계하십시오."
@@ -255,7 +255,7 @@ export const ArchBlueprintDoc: React.FC<ArchBlueprintDocProps> = ({ onClose }) =
                     <div className="space-y-12 animate-fade-in-up">
                        <div className="text-center space-y-4">
                           <h1 className="text-4xl md:text-5xl font-black text-white font-serif uppercase tracking-tight">
-                             Launch <span className="text-white/50 italic">Protocol</span>
+                             Launch <span className="text-white/50 italic pr-2">Protocol</span>
                           </h1>
                           <p className="text-white/40 font-light text-lg">
                              "오픈 빨? 아닙니다. 철저히 계산된 폭발(Explosion)입니다."

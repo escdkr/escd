@@ -19,6 +19,7 @@ import {
   Eye
 } from 'lucide-react';
 import { Book3D, Book3DRef } from './Book3D';
+import { DaggerIcon } from './Navbar';
 
 interface HomeProps {
   onOpenAction: () => void;
@@ -33,7 +34,7 @@ export const Home: React.FC<HomeProps> = ({
   onOpenAction, 
   onGoToDetail, 
   onGoToLegal, 
-  onGoToLogin,
+  onGoToLogin, 
   onGoToPreview,
   onGoToFreeArmory
 }) => {
@@ -103,27 +104,34 @@ export const Home: React.FC<HomeProps> = ({
         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_-20%,_rgba(191,149,63,0.1),transparent_70%)] pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          {/* Section Header */}
-          <div className="text-center mb-32 space-y-6">
-            <h2 className="font-serif font-black text-6xl md:text-8xl text-white tracking-tighter uppercase leading-none drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]">
-              THE <span className="text-gold italic">ARMORY</span>
+          {/* Section Header - The Armory */}
+          <div className="text-center mb-32 space-y-6 group cursor-default">
+            <h2 className="font-serif font-black text-6xl md:text-8xl tracking-tighter uppercase leading-none drop-shadow-[0_0_30px_rgba(255,255,255,0.1)] flex items-center justify-center gap-4">
+              <div className="w-0 overflow-hidden transition-all duration-700 group-hover:w-16 opacity-0 group-hover:opacity-100 flex-shrink-0">
+                <DaggerIcon className="w-16 h-16 -rotate-45 text-gold" />
+              </div>
+              <span className="text-white">THE</span> 
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#BF953F] bg-[length:200%_auto] animate-shine italic pr-3">ARMORY</span>
             </h2>
             <div className="w-24 h-1 bg-gold mx-auto mb-8 shadow-[0_0_15px_rgba(191,149,63,0.5)]" />
             <p className="text-brand-muted text-xl font-serif italic max-w-2xl mx-auto leading-relaxed">
-              전쟁에서 승리하기 위한 무기들을 제공합니다. <br/>
-              등급에 따라 접근 권한이 나뉩니다.
+              경제적 자유를 위한 무기들을 제공합니다.
             </p>
           </div>
 
           {/* ZONE A: SUPPLY DROP (Free Access) */}
-          <div className="mb-40">
-            <div className="flex items-center gap-4 mb-12 border-b border-cyan-500/20 pb-6">
+          <div className="mb-40 group/free">
+            <div className="flex items-center gap-4 mb-12 border-b border-cyan-500/20 pb-6 cursor-default">
                <div className="p-3 bg-cyan-500/10 rounded-full">
                   <Unlock size={24} className="text-[#22D3EE] animate-pulse" />
                </div>
-               <div>
-                  <h3 className="text-2xl font-serif font-black text-white tracking-[0.2em] uppercase">SUPPLY DROP</h3>
-                  <p className="text-[10px] font-mono text-cyan-400 font-bold tracking-[0.4em] uppercase opacity-70">보급품 투하 :: Read Only</p>
+               <div className="flex items-center gap-4">
+                  <div className="w-0 overflow-hidden transition-all duration-500 group-hover/free:w-10 opacity-0 group-hover/free:opacity-100">
+                     <DaggerIcon className="w-10 h-10 -rotate-45 text-[#22D3EE]" />
+                  </div>
+                  <h3 className="text-2xl font-serif font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-white to-cyan-400 bg-[length:200%_auto] animate-shine tracking-[0.2em] uppercase">
+                     FREE
+                  </h3>
                </div>
             </div>
 
@@ -153,17 +161,21 @@ export const Home: React.FC<HomeProps> = ({
           </div>
 
           {/* ZONE B: CLASSIFIED WEAPONS (VIP Access) */}
-          <div className="relative">
+          <div className="relative group/vip">
             {/* Darker background for VIP section */}
             <div className="absolute -inset-20 bg-black/40 blur-[100px] pointer-events-none" />
             
-            <div className="flex items-center gap-4 mb-12 border-b border-gold/20 pb-6 relative z-10">
+            <div className="flex items-center gap-4 mb-12 border-b border-gold/20 pb-6 relative z-10 cursor-default">
                <div className="p-3 bg-gold/10 rounded-full">
                   <Lock size={24} className="text-gold" />
                </div>
-               <div>
-                  <h3 className="text-2xl font-serif font-black text-white tracking-[0.2em] uppercase">CLASSIFIED WEAPONS</h3>
-                  <p className="text-[10px] font-mono text-gold font-bold tracking-[0.4em] uppercase opacity-70">1급 기밀 무기 :: VIP ONLY</p>
+               <div className="flex items-center gap-4">
+                  <div className="w-0 overflow-hidden transition-all duration-500 group-hover/vip:w-10 opacity-0 group-hover/vip:opacity-100">
+                     <DaggerIcon className="w-10 h-10 -rotate-45 text-gold" />
+                  </div>
+                  <h3 className="text-2xl font-serif font-black text-transparent bg-clip-text bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#BF953F] bg-[length:200%_auto] animate-shine tracking-[0.2em] uppercase">
+                     VIP Only
+                  </h3>
                </div>
             </div>
 

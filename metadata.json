@@ -1,5 +1,6 @@
 {
   "name": "ESCD",
   "description": "프리미엄 지식 콘텐츠 판매를 위해 설계된 권위 있고 고급스러운 플랫폼 레이아웃.",
-  "requestFramePermissions": []
+  "requestFramePermissions": [],
+  "majorCapabilities": []
 }

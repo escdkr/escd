@@ -1,8 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
-import { Layout } from './Layout';
 import { Button } from './Button';
 import { Check, Timer, Play, ChevronDown, User, Star, ArrowLeft, Lock, ShieldCheck, Globe, Clock, ExternalLink, Zap, MessageSquareQuote, Unlock, Download, FileText, Map, Calculator, AlertTriangle, ShieldAlert, ChevronRight, Eye } from 'lucide-react';
+import { DaggerIcon } from './Navbar';
 
 interface ProductDetailProps {
   onBack: () => void;
@@ -46,7 +46,7 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ onBack, onCheckout
   };
  
   return (
-    <Layout onLogoClick={onBack}>
+    <>
       <div className="max-w-7xl mx-auto px-6 pt-10 pb-32">
         {/* Navigation Breadcrumb */}
         <button 
@@ -89,7 +89,7 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ onBack, onCheckout
             {/* Hook Headline */}
             <div className="space-y-8 text-left">
               <h2 className="font-serif font-black text-4xl md:text-5xl lg:text-7xl text-white leading-tight tracking-tighter">
-                왜 <span className="text-gold italic font-black">99.9%</span>의 인간은 평생 <br />
+                왜 <span className="text-gold italic font-black pr-3">99.9%</span>의 인간은 평생 <br />
                 돈의 노예로 생을 마감하는가?
               </h2>
               <div className="space-y-6 text-xl text-gray-300 font-sans font-light leading-[1.8]">
@@ -315,21 +315,32 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ onBack, onCheckout
 
         {/* --- THE ARMORY: STRATEGIC ASSETS SECTION --- */}
         <section id="armory" className="mt-40 space-y-20 relative overflow-hidden">
-          <div className="text-center space-y-4 relative z-10">
-            <h2 className="font-serif font-black text-5xl md:text-8xl text-white tracking-tighter uppercase leading-none">
-              STRATEGIC <span className="text-gold italic">ASSETS</span>
+          <div className="text-center space-y-4 relative z-10 group cursor-default">
+            <h2 className="font-serif font-black text-5xl md:text-8xl text-white tracking-tighter uppercase leading-none flex items-center justify-center gap-4">
+              <div className="w-0 overflow-hidden transition-all duration-700 group-hover:w-16 opacity-0 group-hover:opacity-100 flex-shrink-0">
+                <DaggerIcon className="w-16 h-16 -rotate-45 text-gold" />
+              </div>
+              <span className="text-white">THE</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#BF953F] bg-[length:200%_auto] animate-shine italic pr-3">ARMORY</span>
             </h2>
             <p className="text-brand-muted text-lg font-serif italic max-w-2xl mx-auto">
-              맨손으로 싸우지 마십시오. 우리가 제공하는 무기를 들고 시스템을 해킹하십시오.
+              경제적 자유를 위한 무기들을 제공합니다.
             </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 relative z-10">
             {/* FREE ACCESS ZONE */}
             <div className="space-y-8">
-               <div className="flex items-center gap-4 border-b border-cyan-500/20 pb-4">
+               <div className="flex items-center gap-4 border-b border-cyan-500/20 pb-4 group/free cursor-default">
                   <Unlock size={20} className="text-cyan-400" />
-                  <h3 className="text-xl font-serif font-black text-white tracking-widest uppercase">FREE ACCESS <span className="text-cyan-400/50 text-xs ml-2 font-mono">보급형 무기</span></h3>
+                  <div className="flex items-center gap-3">
+                     <div className="w-0 overflow-hidden transition-all duration-500 group-hover/free:w-8 opacity-0 group-hover/free:opacity-100">
+                       <DaggerIcon className="w-8 h-8 -rotate-45 text-[#22D3EE]" />
+                     </div>
+                     <h3 className="text-xl font-serif font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-white to-cyan-400 bg-[length:200%_auto] animate-shine tracking-widest uppercase">
+                        FREE
+                     </h3>
+                  </div>
                </div>
                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <ArmoryCard 
@@ -353,9 +364,16 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ onBack, onCheckout
 
             {/* VIP CLASSIFIED ZONE */}
             <div className="space-y-8">
-               <div className="flex items-center gap-4 border-b border-gold/20 pb-4">
+               <div className="flex items-center gap-4 border-b border-gold/20 pb-4 group/vip cursor-default">
                   <Lock size={20} className="text-gold" />
-                  <h3 className="text-xl font-serif font-black text-white tracking-widest uppercase">CLASSIFIED <span className="text-gold/50 text-xs ml-2 font-mono">VIP 전용 특수 병기</span></h3>
+                  <div className="flex items-center gap-3">
+                     <div className="w-0 overflow-hidden transition-all duration-500 group-hover/vip:w-8 opacity-0 group-hover/vip:opacity-100">
+                       <DaggerIcon className="w-8 h-8 -rotate-45 text-gold" />
+                     </div>
+                     <h3 className="text-xl font-serif font-black text-transparent bg-clip-text bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#BF953F] bg-[length:200%_auto] animate-shine tracking-widest uppercase">
+                        VIP Only
+                     </h3>
+                  </div>
                </div>
                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <ArmoryCard 
@@ -389,13 +407,16 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ onBack, onCheckout
 
         {/* --- THE ARCHITECTS: MASONRY REVIEW SECTION --- */}
         <section id="reviews" className="mt-40 space-y-20 relative overflow-hidden">
-          <div className="text-center space-y-4 relative z-10">
-            <h2 className="font-serif font-black text-5xl md:text-8xl text-white tracking-tighter uppercase leading-none">
-              THE <span className="text-gold italic">ARCHITECTS</span>
+          <div className="text-center space-y-4 relative z-10 group cursor-default">
+            <h2 className="font-serif font-black text-5xl md:text-8xl text-white tracking-tighter uppercase leading-none flex items-center justify-center gap-4">
+              <div className="w-0 overflow-hidden transition-all duration-700 group-hover:w-16 opacity-0 group-hover:opacity-100 flex-shrink-0">
+                <DaggerIcon className="w-16 h-16 -rotate-45 text-gold" />
+              </div>
+              <span className="text-white">THE</span> 
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#BF953F] bg-[length:200%_auto] animate-shine italic pr-3">ARCHITECTS</span>
             </h2>
             <p className="text-brand-muted text-lg font-serif italic max-w-2xl mx-auto">
-              이미 시스템을 장착하고 자본주의를 해킹한 선구자들의 기록. <br/>
-              단순한 후기가 아닌, 생존과 번영의 증명서입니다.
+              경제적 자유를 획득하십시오.
             </p>
           </div>
 
@@ -477,7 +498,7 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ onBack, onCheckout
           구매하기
         </Button>
       </div>
-    </Layout>
+    </>
   );
 };
 

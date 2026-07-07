@@ -18,7 +18,7 @@ import { MatrixHackingDoc } from './MatrixHackingDoc'; // Import unified doc
 
 interface ColumnSeries {
   id: string;
-  category: 'MINDSET' | 'STRATEGY' | 'SYSTEM' | 'FUTURE';
+  category: '마인드셋' | '실전 전략' | '시스템 구축' | '미래 전망'; // Changed to Korean
   title: string;
   subtitle: string;
   desc: string;
@@ -32,7 +32,7 @@ interface ColumnSeries {
 const COLUMNS: ColumnSeries[] = [
   {
     id: 'c1',
-    category: 'MINDSET',
+    category: '마인드셋', // MINDSET
     title: '자본주의 매트릭스 해킹',
     subtitle: '돈은 숫자가 아니라 신호다',
     desc: '당신이 평생 돈을 벌지 못하는 이유는 돈을 "물질"로 보기 때문이다. 돈은 신뢰의 디지털 신호이며, 이 신호를 조작하는 자가 시스템을 지배한다.',
@@ -44,7 +44,7 @@ const COLUMNS: ColumnSeries[] = [
   },
   {
     id: 'c2',
-    category: 'STRATEGY',
+    category: '실전 전략', // STRATEGY
     title: '인간 OS 분석: 파충류의 뇌',
     subtitle: '이성보다 강력한 본능의 스위치',
     desc: '고객은 논리로 설득되지 않는다. 그들의 뇌간(Brainstem)에 직접 명령어를 입력하라. 공포, 욕망, 그리고 소속감을 자극하는 원초적 코딩.',
@@ -73,7 +73,7 @@ const COLUMNS: ColumnSeries[] = [
   },
   {
     id: 'c3',
-    category: 'SYSTEM',
+    category: '시스템 구축', // SYSTEM
     title: '무한 확장의 법칙: 레버리지',
     subtitle: '나의 시간은 0에 수렴한다',
     desc: '타인의 시간(OPT)과 타인의 돈(OPM)을 이용하지 않는다면 당신은 영원히 노동자다. 시스템이 당신 대신 일하게 만드는 구체적인 청사진.',
@@ -84,7 +84,7 @@ const COLUMNS: ColumnSeries[] = [
   },
   {
     id: 'c4',
-    category: 'FUTURE',
+    category: '미래 전망', // FUTURE
     title: '넥스트 웨이브: 디지털 봉건제',
     subtitle: 'AI 시대, 지주가 될 것인가 소작농이 될 것인가',
     desc: '인공지능은 노동을 대체한다. 이제 생산수단(AI, 알고리즘)을 소유한 소수의 지주와, 그들에게 구독료를 내는 다수의 소작농만 남을 것이다.',
@@ -95,7 +95,7 @@ const COLUMNS: ColumnSeries[] = [
   },
   {
     id: 'c5',
-    category: 'STRATEGY',
+    category: '실전 전략', // STRATEGY
     title: '침묵의 권위: The Silent Authority',
     subtitle: '떠들지 않고 지배하는 법',
     desc: '시끄러운 마케팅은 하수다. 진정한 고수는 존재만으로 압도한다. 말하지 않고도 고객을 줄 세우는 브랜딩의 흑마술.',
@@ -106,7 +106,7 @@ const COLUMNS: ColumnSeries[] = [
   },
   {
     id: 'c6',
-    category: 'MINDSET',
+    category: '마인드셋', // MINDSET
     title: '고독한 늑대의 길',
     subtitle: '무리에서 이탈하라',
     desc: '대중과 반대로 가는 것이 두려운가? 성공은 언제나 외로운 길 위에 있다. 99%의 양 떼가 절벽으로 향할 때, 홀로 숲으로 들어가는 용기.',
@@ -160,7 +160,7 @@ export const CurriculumPage: React.FC<{ onCheckout: () => void }> = ({ onCheckou
                 <span className="text-[10px] font-serif font-bold tracking-[0.2em] uppercase text-white">Editorial Series</span>
              </div>
              <h1 className="font-serif font-black text-6xl md:text-8xl tracking-tight uppercase leading-none text-white drop-shadow-2xl">
-               THE <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-200 to-gray-500 italic">ARCHIVES</span>
+               THE <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-200 to-gray-500 italic pr-3">ARCHIVES</span>
              </h1>
           </div>
           

@@ -2,32 +2,16 @@
 import React, { useState } from 'react';
 import { 
   Eye, 
-  FileSpreadsheet, 
-  FileText, 
-  Map, 
   Terminal, 
-  Unlock, 
   Lock, 
-  Zap, 
-  Shield, 
   ChevronRight, 
-  Database, 
-  ExternalLink, 
-  Share2, 
-  Brain, 
-  Network, 
-  Cpu, 
-  LayoutTemplate, 
-  MessageSquare, 
-  Globe, 
-  X,
-  CheckCircle2,
-  Download,
-  Activity,
-  Crosshair
+  CheckCircle2
 } from 'lucide-react';
 import { Button } from './Button';
 import { useSystem } from './SystemCore';
+import { FreeAsset } from '../types/armory';
+import { FREE_ASSETS } from '../data/armory/free';
+
 import { MatrixHackingDoc } from './MatrixHackingDoc';
 import { GlitchDiagnosticDoc } from './GlitchDiagnosticDoc';
 import { ZeroToOneRoadmapDoc } from './ZeroToOneRoadmapDoc';
@@ -38,107 +22,12 @@ import { FrameControlDoc } from './FrameControlDoc';
 import { SourcingSecretsDoc } from './SourcingSecretsDoc';
 import { KeywordSniperDoc } from './KeywordSniperDoc';
 
-interface Asset {
-  id: string;
-  title: string;
-  category: 'PDF' | 'EXCEL' | 'NOTION' | 'WEB' | 'MAP';
-  desc: string;
-  volume: string; 
-  views: number; 
-  icon: React.ReactNode;
-}
-
-const ASSETS: Asset[] = [
-  // --- CORE SYSTEM (Base) ---
-  {
-    id: 'f1',
-    title: 'The Glitch 진단 키트',
-    category: 'WEB',
-    desc: '노동 소득 의존도 정밀 분석 및 탈출 시뮬레이션.',
-    volume: 'Interactive',
-    views: 12450,
-    icon: <Activity size={24} />
-  },
-  {
-    id: 'c1',
-    title: '자본주의 매트릭스 해킹',
-    category: 'PDF',
-    desc: '노동자의 마인드셋을 영구 삭제하는 초기화 코드.',
-    volume: '34 Pages',
-    views: 4200,
-    icon: <Brain size={24} />
-  },
-  {
-    id: 'f2',
-    title: '무자본 창업 0 to 1 로드맵',
-    category: 'MAP',
-    desc: '아이템 선정부터 첫 수익 발생까지의 시각화된 지도.',
-    volume: 'High Res',
-    views: 8902,
-    icon: <Map size={24} />
-  },
-  {
-    id: 'c2',
-    title: '파충류 뇌 자극 템플릿',
-    category: 'EXCEL',
-    desc: '본능을 타격하여 구매 전환율을 높이는 카피라이팅 구조.',
-    volume: 'Live Doc',
-    views: 9800,
-    icon: <Zap size={24} />
-  },
-  {
-    id: 'c3',
-    title: '무한 레버리지 위임 프로토콜',
-    category: 'NOTION',
-    desc: '업무 위임 체크리스트 및 자동화 매뉴얼.',
-    volume: 'System',
-    views: 6500,
-    icon: <Network size={24} />
-  },
-  {
-    id: 'c5',
-    title: '무언의 브랜딩(Silent Authority)',
-    category: 'PDF',
-    desc: '말하지 않고도 권위를 풍기는 디자인 가이드라인.',
-    volume: '60 Pages',
-    views: 3120,
-    icon: <LayoutTemplate size={24} />
-  },
-  {
-    id: 'c6',
-    title: '프레임 컨트롤 대화법',
-    category: 'PDF',
-    desc: '협상에서 우위를 점하는 "갑"의 언어 습관 분석.',
-    volume: 'Script',
-    views: 5400,
-    icon: <MessageSquare size={24} />
-  },
-  {
-    id: 'f4',
-    title: '시크릿 소싱처 50선',
-    category: 'EXCEL',
-    desc: '검증된 도매처와 위탁 판매 사이트 데이터베이스.',
-    volume: 'Database',
-    views: 15200,
-    icon: <Database size={24} />
-  },
-  {
-    id: 'f5',
-    title: '키워드 스나이퍼',
-    category: 'WEB',
-    desc: '경쟁 강도는 낮고 검색량은 높은 황금 키워드 발굴 툴.',
-    volume: 'Tool',
-    views: 3400,
-    icon: <Crosshair size={24} />
-  }
-];
-
 export const FreeArmoryPage: React.FC<{ onCheckout: () => void }> = ({ onCheckout }) => {
   const { toast, sounds } = useSystem();
   const [accessingId, setAccessingId] = useState<string | null>(null);
-  const [selectedAsset, setSelectedAsset] = useState<Asset | null>(null);
+  const [selectedAsset, setSelectedAsset] = useState<FreeAsset | null>(null);
 
-  const handleAccess = (asset: Asset) => {
+  const handleAccess = (asset: FreeAsset) => {
     sounds.play('access');
     setAccessingId(asset.id);
     
@@ -189,7 +78,7 @@ export const FreeArmoryPage: React.FC<{ onCheckout: () => void }> = ({ onCheckou
                  <span className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-cyan-400">Tactical Supply Depot</span>
               </div>
               <h1 className="font-serif font-black text-5xl md:text-7xl tracking-tighter uppercase leading-none text-white drop-shadow-[0_0_30px_rgba(34,211,238,0.2)]">
-                 Standard <span className="text-cyan-400 italic">Armory</span>
+                 Standard <span className="text-cyan-400 italic pr-3">Armory</span>
               </h1>
               <p className="text-slate-400 text-lg font-serif italic max-w-xl leading-relaxed">
                  "전쟁을 시작하기 위한 기초 보급품입니다. <br/>
@@ -209,7 +98,7 @@ export const FreeArmoryPage: React.FC<{ onCheckout: () => void }> = ({ onCheckou
 
         {/* Assets Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-           {ASSETS.map((asset) => (
+           {FREE_ASSETS.map((asset) => (
               <AssetCard 
                 key={asset.id} 
                 asset={asset} 
@@ -244,7 +133,7 @@ export const FreeArmoryPage: React.FC<{ onCheckout: () => void }> = ({ onCheckou
 };
 
 // --- TACTICAL CARD COMPONENT ---
-const AssetCard: React.FC<{ asset: Asset; isAccessing: boolean; onAccess: () => void }> = ({ asset, isAccessing, onAccess }) => {
+const AssetCard: React.FC<{ asset: FreeAsset; isAccessing: boolean; onAccess: () => void }> = ({ asset, isAccessing, onAccess }) => {
   return (
     <div className="group relative bg-[#0f172a]/40 border border-white/5 hover:border-cyan-500/50 rounded-sm overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(34,211,238,0.1)] flex flex-col h-full backdrop-blur-sm">
       
@@ -306,7 +195,7 @@ const AssetCard: React.FC<{ asset: Asset; isAccessing: boolean; onAccess: () => 
   );
 };
 
-const GenericAssetViewer: React.FC<{ asset: Asset; onClose: () => void; onUpgrade: () => void }> = ({ asset, onClose, onUpgrade }) => {
+const GenericAssetViewer: React.FC<{ asset: FreeAsset; onClose: () => void; onUpgrade: () => void }> = ({ asset, onClose, onUpgrade }) => {
   return (
     <div className="fixed inset-0 z-[200] flex items-start justify-center bg-black/95 backdrop-blur-xl animate-fade-in p-6 pt-24 overflow-y-auto">
       <div className="relative w-full max-w-2xl bg-[#0a0a0a] border border-cyan-500/30 shadow-[0_0_100px_rgba(34,211,238,0.15)] rounded-sm p-8 md:p-12 text-center space-y-8 mb-20">

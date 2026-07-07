@@ -7,12 +7,12 @@ import {
   Filter, 
   Search, 
   ThumbsUp, 
-  MessageSquare,
-  Crown,
-  Quote,
-  CheckCircle2,
-  Lock,
-  ArrowUpRight
+  MessageSquare, 
+  Crown, 
+  Quote, 
+  CheckCircle2, 
+  Lock, 
+  ArrowUpRight 
 } from 'lucide-react';
 import { Button } from './Button';
 
@@ -168,7 +168,7 @@ export const ReviewsPage: React.FC = () => {
                  <span className="text-[10px] font-serif font-bold tracking-[0.2em] uppercase text-emerald-500">Hall of Evidence</span>
               </div>
               <h1 className="font-serif font-black text-5xl md:text-7xl text-white tracking-tighter uppercase leading-none drop-shadow-2xl">
-                 The <span className="text-gold italic">Proof</span>
+                 The <span className="text-gold italic pr-3">Proof</span>
               </h1>
            </div>
            
