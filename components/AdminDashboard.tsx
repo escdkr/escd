@@ -28,6 +28,7 @@ import { UserProfile } from '../App';
 import { Button } from './Button';
 import { useSystem } from './SystemCore';
 import { ROUTES, RouteType } from '../constants/routes';
+import { COURSES } from '../data/lms/courses';
 
 // Import Real Data
 import { VIP_ASSETS } from '../data/armory/vip';
@@ -122,7 +123,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout, user, 
         <nav className="flex flex-col gap-8 flex-grow">
           <AdminSidebarIcon icon={<BarChart3 size={20} />} active={activeTab === 'overwatch'} onClick={() => setActiveTab('overwatch')} label="종합 현황" />
           <AdminSidebarIcon icon={<Package size={20} />} active={activeTab === 'products'} onClick={() => setActiveTab('products')} label="자산 관리" />
-          <AdminSidebarIcon icon={<BookOpen size={20} />} active={activeTab === 'library'} onClick={() => setActiveTab('library')} label="도서관" />
+          <AdminSidebarIcon icon={<BookOpen size={20} />} active={activeTab === 'courses'} onClick={() => setActiveTab('courses')} label="강의 관리" />
           <AdminSidebarIcon icon={<Users size={20} />} active={activeTab === 'operatives'} onClick={() => setActiveTab('operatives')} label="요원 명부" />
           <AdminSidebarIcon icon={<Cpu size={20} />} active={activeTab === 'mainframe'} onClick={() => setActiveTab('mainframe')} label="메인프레임" />
           
@@ -242,6 +243,81 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout, user, 
                      ))}
                   </div>
                </div>
+            </div>
+          )}
+
+          {/* COURSES TAB */}
+          {activeTab === 'courses' && (
+            <div className="space-y-8 animate-fade-in">
+              <div className="flex justify-between items-center border-b border-white/5 pb-6">
+                <div>
+                  <h2 className="text-lg font-serif font-black text-white">강의 관리</h2>
+                  <p className="text-xs text-white/30 font-mono mt-1">LMS 강의 · 챕터 · 레슨 관리</p>
+                </div>
+                <Button variant="outline" size="sm" className="border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/10 text-xs tracking-widest">
+                  + 강의 추가
+                </Button>
+              </div>
+
+              {COURSES.map((course) => {
+                const totalLessons = course.chapters.reduce((a, ch) => a + ch.lessons.length, 0);
+                const lockedLessons = course.chapters.reduce((a, ch) => a + ch.lessons.filter((l) => l.locked).length, 0);
+                return (
+                  <div key={course.id} className="bg-white/[0.02] border border-white/5 rounded-sm overflow-hidden">
+                    {/* Course Header */}
+                    <div className="flex items-center justify-between px-6 py-4 border-b border-white/5 bg-white/[0.02]">
+                      <div>
+                        <p className="font-serif font-black text-white">{course.title}</p>
+                        <p className="text-xs text-white/30 mt-0.5">{course.subtitle.split('—')[0].trim()}</p>
+                      </div>
+                      <div className="flex items-center gap-6 text-xs font-mono">
+                        <div className="text-center">
+                          <p className="text-white/20 mb-0.5">레슨</p>
+                          <p className="text-white font-bold">{totalLessons}</p>
+                        </div>
+                        <div className="text-center">
+                          <p className="text-white/20 mb-0.5">잠금</p>
+                          <p className="text-[#FBBF24] font-bold">{lockedLessons}</p>
+                        </div>
+                        <div className="text-center">
+                          <p className="text-white/20 mb-0.5">챕터</p>
+                          <p className="text-white font-bold">{course.chapters.length}</p>
+                        </div>
+                        <span className="px-2 py-1 text-[10px] bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-sm tracking-widest uppercase">Active</span>
+                      </div>
+                    </div>
+
+                    {/* Chapter / Lesson list */}
+                    <div className="divide-y divide-white/[0.03]">
+                      {course.chapters.map((ch) => (
+                        <div key={ch.id}>
+                          <div className="flex items-center gap-4 px-6 py-3 bg-black/20">
+                            <span className="text-[10px] font-mono text-white/20 w-8">Ch.{String(ch.number).padStart(2, '0')}</span>
+                            <span className="text-xs font-semibold text-white/60">{ch.title.replace(/^Chapter \d+\. /, '')}</span>
+                            <span className="ml-auto text-[10px] text-white/20 font-mono">{ch.lessons.length}개 레슨</span>
+                          </div>
+                          {ch.lessons.map((l) => (
+                            <div key={l.id} className="flex items-center gap-4 px-6 py-2.5 hover:bg-white/[0.01] transition-colors group">
+                              <span className="w-8 shrink-0" />
+                              <span className={`text-[10px] font-mono uppercase tracking-widest shrink-0 ${l.locked ? 'text-[#FBBF24]/50' : 'text-emerald-400/50'}`}>
+                                {l.locked ? 'LOCKED' : 'OPEN'}
+                              </span>
+                              <span className="text-xs text-white/50 flex-1 truncate">{l.title}</span>
+                              <span className="text-[10px] text-white/20 font-mono shrink-0">{l.type} · {l.duration}</span>
+                              <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button className="text-[10px] font-mono text-cyan-400/60 hover:text-cyan-400 transition-colors tracking-widest uppercase">편집</button>
+                                <button className="text-[10px] font-mono text-[#FBBF24]/60 hover:text-[#FBBF24] transition-colors tracking-widest uppercase">
+                                  {l.locked ? '잠금 해제' : '잠금'}
+                                </button>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           )}
 
