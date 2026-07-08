@@ -18,8 +18,11 @@ import {
 } from 'lucide-react';
 import { MasterNeonDagger } from './LoginPage';
 import { UserProfile } from '../App';
-import { ROUTES, RouteType } from '../constants/routes';
-import { useSystem } from './SystemCore'; // Import System Hook
+import { ROUTES, RouteType, courseUrl, lessonUrl } from '../constants/routes';
+import { useSystem } from './SystemCore';
+import { useProgress } from '../hooks/useProgress';
+import { getCourse, getAllLessons } from '../data/lms/courses';
+import { useNavigate } from 'react-router-dom';
 
 interface DashboardProps {
   onLogout: () => void;
@@ -48,7 +51,17 @@ export const Dashboard: React.FC<DashboardProps> = ({ onLogout, user, onNavigate
   const [activeChapter, setActiveChapter] = useState(curriculum[2]);
   const [isDecrypting, setIsDecrypting] = useState(false);
   const [logs, setLogs] = useState(missionLogsSeed);
-  const { toast, sounds } = useSystem(); // Use System Hook
+  const { toast, sounds } = useSystem();
+  const navigate = useNavigate();
+
+  // LMS progress
+  const COURSE_ID = 'the-glitch';
+  const course = getCourse(COURSE_ID);
+  const allLessons = getAllLessons(COURSE_ID);
+  const { isCompleted, progressPct } = useProgress(COURSE_ID);
+  const lmsPct = progressPct(allLessons.length);
+  const firstUnlocked = allLessons.find((x) => !x.lesson.locked && !isCompleted(x.lesson.id));
+  const continueLesson = firstUnlocked ?? allLessons[0];
 
   // Simulation: Add a new log every few seconds
   useEffect(() => {
@@ -177,33 +190,50 @@ export const Dashboard: React.FC<DashboardProps> = ({ onLogout, user, onNavigate
 
         {/* Right Panel */}
         <aside className="w-full md:w-96 flex-shrink-0 bg-black/60 border-l border-white/5 flex flex-col z-20 backdrop-blur-3xl hidden md:flex">
-          <div className="p-8 space-y-6 border-b border-white/5">
+          <div className="p-8 space-y-4 border-b border-white/5">
             <div className="flex justify-between items-end">
-               <h4 className="text-[10px] font-mono tracking-[0.3em] uppercase text-white/40">System Synchronization</h4>
-               <span className="text-xl font-serif font-black text-cyan-400 italic tracking-tighter">12%</span>
+               <h4 className="text-[10px] font-mono tracking-[0.3em] uppercase text-white/40">강의 진도율</h4>
+               <span className="text-xl font-serif font-black text-cyan-400 italic tracking-tighter">{lmsPct}%</span>
             </div>
             <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
-               <div className="h-full w-[12%] bg-gradient-to-r from-cyan-400 to-violet-500 shadow-[0_0_10px_rgba(34,211,238,0.5)]" />
+               <div className="h-full bg-gradient-to-r from-cyan-400 to-violet-500 shadow-[0_0_10px_rgba(34,211,238,0.5)] transition-all duration-500" style={{ width: `${lmsPct}%` }} />
             </div>
+            <button
+               onClick={() => continueLesson && navigate(lessonUrl(COURSE_ID, continueLesson.lesson.id))}
+               className="w-full py-2 border border-cyan-500/20 text-cyan-400/70 text-[10px] font-mono tracking-widest uppercase hover:bg-cyan-500/5 transition-colors rounded-sm"
+            >
+               {lmsPct === 0 ? '학습 시작 →' : lmsPct === 100 ? '수료증 보기 →' : '이어서 학습 →'}
+            </button>
           </div>
           <div className="flex-grow overflow-y-auto no-scrollbar py-6">
-            <div className="px-8 mb-6"><span className="text-[10px] font-mono tracking-[0.2em] uppercase text-white/20">Operations Blueprint</span></div>
+            <div className="px-8 mb-4 flex items-center justify-between">
+               <span className="text-[10px] font-mono tracking-[0.2em] uppercase text-white/20">Operations Blueprint</span>
+               <button onClick={() => navigate(courseUrl(COURSE_ID))} className="text-[9px] font-mono text-cyan-400/40 hover:text-cyan-400 transition-colors tracking-widest uppercase">전체 보기</button>
+            </div>
             <div className="space-y-1">
-               {curriculum.map((chapter) => (
-                 <button key={chapter.id} onClick={() => handleChapterSelect(chapter)} className={`w-full flex items-center justify-between px-8 py-5 text-left transition-all relative group ${activeChapter.id === chapter.id ? 'bg-cyan-500/5' : 'hover:bg-white/[0.02]'} ${chapter.status === 'locked' ? 'opacity-30 cursor-not-allowed' : 'cursor-pointer'}`}>
-                   {activeChapter.id === chapter.id && <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-cyan-400 shadow-[2px_0_10px_rgba(34,211,238,0.5)]" />}
-                   <div className="flex items-center gap-4">
-                     {chapter.status === 'completed' ? <CheckCircle2 size={16} className="text-cyan-400" /> : chapter.status === 'locked' ? <Lock size={16} className="text-white/20" /> : <div className="w-4 h-4 rounded-full border border-cyan-400/50 flex items-center justify-center"><div className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-pulse" /></div>}
-                     <div className="space-y-1">
-                        <span className={`text-xs font-serif font-bold tracking-tight block ${activeChapter.id === chapter.id ? 'text-white' : 'text-white/60 group-hover:text-white/80'}`}>{chapter.title}</span>
-                        <div className="flex items-center gap-3 text-[9px] font-mono tracking-widest uppercase text-white/20">
-                           <span className="flex items-center gap-1">{chapter.type === 'video' ? <PlayCircle size={10} /> : <BookOpen size={10} />}{chapter.type}</span>
-                           <span>{chapter.duration}</span>
-                        </div>
+               {allLessons.map(({ lesson }, idx) => {
+                 const done = isCompleted(lesson.id);
+                 const locked = lesson.locked;
+                 return (
+                   <button
+                     key={lesson.id}
+                     disabled={locked}
+                     onClick={() => !locked && navigate(lessonUrl(COURSE_ID, lesson.id))}
+                     className={`w-full flex items-center justify-between px-8 py-4 text-left transition-all relative group ${locked ? 'opacity-30 cursor-not-allowed' : 'hover:bg-white/[0.02] cursor-pointer'}`}
+                   >
+                     <div className="flex items-center gap-4">
+                       {done ? <CheckCircle2 size={16} className="text-cyan-400" /> : locked ? <Lock size={16} className="text-white/20" /> : <div className="w-4 h-4 rounded-full border border-white/20" />}
+                       <div className="space-y-0.5">
+                         <span className={`text-xs font-serif font-bold tracking-tight block ${done ? 'text-white/60 line-through' : 'text-white/70 group-hover:text-white/90'}`}>{lesson.title}</span>
+                         <div className="flex items-center gap-2 text-[9px] font-mono tracking-widest uppercase text-white/20">
+                           <span>{lesson.type}</span>
+                           <span>{lesson.duration}</span>
+                         </div>
+                       </div>
                      </div>
-                   </div>
-                 </button>
-               ))}
+                   </button>
+                 );
+               })}
             </div>
           </div>
         </aside>
