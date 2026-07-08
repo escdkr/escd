@@ -17,7 +17,15 @@ export const ROUTES = {
   PREVIEW: '/preview/hidden-chapter',
   CURRICULUM: '/curriculum',
   AUTHOR: '/author',
+  // LMS
+  COURSE: '/courses/:courseId',
+  LESSON: '/courses/:courseId/lessons/:lessonId',
+  CERTIFICATE: '/certificate/:courseId',
   NOT_FOUND: '*'
 } as const;
 
 export type RouteType = typeof ROUTES[keyof typeof ROUTES];
+
+export const courseUrl = (courseId: string) => `/courses/${courseId}`;
+export const lessonUrl = (courseId: string, lessonId: string) => `/courses/${courseId}/lessons/${lessonId}`;
+export const certificateUrl = (courseId: string) => `/certificate/${courseId}`;
