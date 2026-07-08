@@ -5,6 +5,9 @@ import { Layout } from './components/Layout';
 import { ScrollToTop } from './components/ScrollToTop';
 import { UserProvider, useUser } from './context/UserContext';
 import type { UserProfile } from './context/UserContext';
+import { CoursePage } from './pages/CoursePage';
+import { LessonPage } from './pages/LessonPage';
+import { CertificatePage } from './pages/CertificatePage';
 import { ProductDetail } from './components/ProductDetail';
 import { CheckoutPage } from './components/CheckoutPage';
 import { LoginPage } from './components/LoginPage';
@@ -240,6 +243,9 @@ const AppRoutes: React.FC = () => {
         <Route path={ROUTES.FAQ} element={<FAQRoute />} />
         <Route path={ROUTES.LEGAL} element={<LegalRoute />} />
         <Route path={ROUTES.PREVIEW} element={<HiddenChapterRoute />} />
+        <Route path={ROUTES.COURSE} element={<CoursePage />} />
+        <Route path={ROUTES.LESSON} element={<LessonPage />} />
+        <Route path={ROUTES.CERTIFICATE} element={<CertificatePage />} />
         <Route path={ROUTES.NOT_FOUND} element={<NotFoundRoute />} />
       </Routes>
     </>
