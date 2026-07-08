@@ -278,7 +278,7 @@ export const ReptilianBrainTemplateDoc: React.FC<ReptilianBrainTemplateDocProps>
                         </div>
                         <div>
                             <h3 className="font-bold text-lg uppercase tracking-tight text-white">Neuro-Copy Generator</h3>
-                            <p className="text-[10px] font-mono text-gray-500">Insert Product Name -> Get 3 Hypnotic Headlines</p>
+                            <p className="text-[10px] font-mono text-gray-500">Insert Product Name {'->'} Get 3 Hypnotic Headlines</p>
                         </div>
                     </div>
 
