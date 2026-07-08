@@ -180,7 +180,7 @@ export const TrafficHijackDoc: React.FC<TrafficHijackDocProps> = ({ onClose }) =
                                  현재 유행하는 뉴스나 이슈를 당신의 비즈니스와 연결하여 콘텐츠를 발행하십시오.
                               </p>
                               <div className="bg-black p-3 text-[10px] font-mono text-gray-500 rounded-sm">
-                                 Ex: "오징어게임 열풍? -> 오징어게임에서 배우는 협상 전략 3가지"
+                                 Ex: "오징어게임 열풍? {'->'} 오징어게임에서 배우는 협상 전략 3가지"
                               </div>
                            </div>
 
