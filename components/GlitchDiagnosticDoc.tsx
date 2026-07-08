@@ -357,7 +357,7 @@ export const GlitchDiagnosticDoc: React.FC<GlitchDiagnosticDocProps> = ({ onClos
                                     3년 안에 시스템을 만들지 못하면, 당신은 알고리즘의 하위 계급으로 전락합니다.
                                  </p>
                                  <p className="text-cyan-400 font-bold animate-pulse">
-                                    > 유일한 탈출구는 노동자가 아닌 '설계자'가 되는 것뿐입니다.
+                                    {'>'} 유일한 탈출구는 노동자가 아닌 '설계자'가 되는 것뿐입니다.
                                  </p>
                               </div>
                            ) : (
